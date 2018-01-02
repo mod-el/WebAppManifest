@@ -41,8 +41,8 @@ $config = '.var_export($config, true).';
 ');
 		if($write){
 			$iconsPath = str_replace(['/', '\\'], '-', $path);
-			if(!is_dir($configPath.DIRECTORY_SEPARATOR.'icons'.$iconsPath))
-				mkdir($configPath.DIRECTORY_SEPARATOR.'icons'.$iconsPath, 0777, true);
+			if(!is_dir($configPath.DIRECTORY_SEPARATOR.'icons'.DIRECTORY_SEPARATOR.$iconsPath))
+				mkdir($configPath.DIRECTORY_SEPARATOR.'icons'.DIRECTORY_SEPARATOR.$iconsPath, 0777, true);
 
 			return true;
 		}else{
