@@ -1,0 +1,6 @@
+{
+	"name": "Web App Manifest",
+	"description": "Creation and management of a manifest for your web app",
+	"version": "0.1.0",
+	"dependencies": {}
+}
