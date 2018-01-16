@@ -4,7 +4,8 @@ use Model\Core\Autoloader;
 use Model\Core\Module;
 use Model\Form\Form;
 
-class WebAppManifest extends Module {
+class WebAppManifest extends Module
+{
 	/** @var array */
 	public $manifestData;
 
@@ -12,11 +13,12 @@ class WebAppManifest extends Module {
 	 * @param string $path
 	 * @return array|null
 	 */
-	public function getManifest($path){
+	public function getManifest(string $path)
+	{
 		$config = $this->retrieveConfig();
-		if(isset($config[$path])){
+		if (isset($config[$path])) {
 			return $config[$path];
-		}else{
+		} else {
 			return null;
 		}
 	}
@@ -26,26 +28,27 @@ class WebAppManifest extends Module {
 	 * @param array $data
 	 * @return bool
 	 */
-	public function setManifest($path, array $data){
-		if(!isset($data['name'], $data['start_url']))
+	public function setManifest(string $path, array $data)
+	{
+		if (!isset($data['name'], $data['start_url']))
 			return false;
 
 		$config = $this->retrieveConfig();
 		$config[$path] = $data;
 
-		$configPath = INCLUDE_PATH.'app'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'WebAppManifest';
-		$configFile = $configPath.DIRECTORY_SEPARATOR.'config.php';
+		$configPath = INCLUDE_PATH . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'WebAppManifest';
+		$configFile = $configPath . DIRECTORY_SEPARATOR . 'config.php';
 
-		$write = (bool) file_put_contents($configFile, '<?php
-$config = '.var_export($config, true).';
+		$write = (bool)file_put_contents($configFile, '<?php
+$config = ' . var_export($config, true) . ';
 ');
-		if($write){
+		if ($write) {
 			$iconsPath = str_replace(['/', '\\'], '-', $path);
-			if(!is_dir($configPath.DIRECTORY_SEPARATOR.'icons'.DIRECTORY_SEPARATOR.$iconsPath))
-				mkdir($configPath.DIRECTORY_SEPARATOR.'icons'.DIRECTORY_SEPARATOR.$iconsPath, 0777, true);
+			if (!is_dir($configPath . DIRECTORY_SEPARATOR . 'icons' . DIRECTORY_SEPARATOR . $iconsPath))
+				mkdir($configPath . DIRECTORY_SEPARATOR . 'icons' . DIRECTORY_SEPARATOR . $iconsPath, 0777, true);
 
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -55,13 +58,14 @@ $config = '.var_export($config, true).';
 	 * @param string $rule
 	 * @return array|bool
 	 */
-	public function getController(array $request, string $rule){
-	    $config = $this->retrieveConfig();
-	    $request = implode('/', $request);
-	    if(!isset($config[$request]))
-	    	return false;
+	public function getController(array $request, string $rule)
+	{
+		$config = $this->retrieveConfig();
+		$request = implode('/', $request);
+		if (!isset($config[$request]))
+			return false;
 
-	    $this->manifestData = $config[$request];
+		$this->manifestData = $config[$request];
 
 		return [
 			'controller' => 'WebAppManifest',
