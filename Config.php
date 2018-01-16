@@ -8,7 +8,7 @@ class Config extends Module_Config {
 	/**
 	 * @return bool
 	 */
-	public function makeCache(){
+	public function makeCache(): bool{
 		$iconFormats = ['16', '32', '48', '64', '72', '96', '144', '168', '192', '256', '512', '1024'];
 
 		$configPath = INCLUDE_PATH.'app'.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'WebAppManifest';
@@ -54,7 +54,8 @@ class Config extends Module_Config {
 	 *
 	 * @return array
 	 */
-	public function getRules(){
+	public function getRules(): array
+	{
 		$config = $this->retrieveConfig();
 
 		$rules = [];

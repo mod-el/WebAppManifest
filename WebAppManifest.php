@@ -55,7 +55,7 @@ $config = '.var_export($config, true).';
 	 * @param string $rule
 	 * @return array|bool
 	 */
-	public function getController(array $request, $rule){
+	public function getController(array $request, string $rule){
 	    $config = $this->retrieveConfig();
 	    $request = implode('/', $request);
 	    if(!isset($config[$request]))
