@@ -7,21 +7,26 @@ class Config extends Module_Config
 	public $configurable = false;
 
 	/**
+	 * @throws \Exception
+	 */
+	protected function assetsList()
+	{
+		$this->addAsset('config', 'config.php', function () {
+			return "<?php\n\$config = [];\n";
+		});
+
+		$this->addAsset('config', 'icons');
+	}
+
+	/**
 	 * @return bool
+	 * @throws \Exception
 	 */
 	public function makeCache(): bool
 	{
 		$iconFormats = ['16', '32', '48', '64', '72', '96', '144', '168', '192', '256', '512', '1024'];
 
 		$configPath = INCLUDE_PATH . 'app' . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'WebAppManifest';
-
-		if (!is_dir($configPath))
-			mkdir($configPath);
-		if (!is_dir($configPath . DIRECTORY_SEPARATOR . 'icons'))
-			mkdir($configPath . DIRECTORY_SEPARATOR . 'icons');
-
-		if (!file_exists($configPath . DIRECTORY_SEPARATOR . 'config.php'))
-			file_put_contents($configPath . DIRECTORY_SEPARATOR . 'config.php', "<?php\n\$config = [];\n");
 
 		$config = $this->retrieveConfig();
 		foreach ($config as $manifest => &$data) {
@@ -55,6 +60,7 @@ class Config extends Module_Config
 	 * Rules for API actions
 	 *
 	 * @return array
+	 * @throws \Exception
 	 */
 	public function getRules(): array
 	{
