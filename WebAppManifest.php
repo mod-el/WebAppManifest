@@ -56,14 +56,14 @@ $config = ' . var_export($config, true) . ';
 	/**
 	 * @param array $request
 	 * @param string $rule
-	 * @return array|bool
+	 * @return array|null
 	 */
-	public function getController(array $request, string $rule)
+	public function getController(array $request, string $rule): ?array
 	{
 		$config = $this->retrieveConfig();
 		$request = implode('/', $request);
 		if (!isset($config[$request]))
-			return false;
+			return null;
 
 		$this->manifestData = $config[$request];
 
