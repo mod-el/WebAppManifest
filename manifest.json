@@ -3,6 +3,6 @@
 	"description": "Creation and management of a manifest for your web app",
 	"version": "0.1.0",
 	"dependencies": {
-		"Core": ">=2.7.1"
+		"Core": ">=2.8.1"
 	}
 }
