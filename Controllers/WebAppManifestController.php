@@ -2,14 +2,17 @@
 
 use Model\Core\Controller;
 
-class WebAppManifestController extends Controller {
-	public function init(){
+class WebAppManifestController extends Controller
+{
+	public function init()
+	{
 		header('Content-Type: text/json');
 	}
 
-	public function index(){
+	public function index()
+	{
 		$manifest = $this->model->_WebAppManifest->manifestData;
-		if(!$manifest)
+		if (!$manifest)
 			die('{}');
 
 		$manifest = array_merge([
