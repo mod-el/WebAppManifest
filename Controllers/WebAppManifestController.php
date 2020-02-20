@@ -19,6 +19,12 @@ class WebAppManifestController extends Controller
 			'short_name' => $manifest['name'],
 			'display' => 'standalone',
 		], $manifest);
+
+		$manifest['start_url'] = PATH . $manifest['start_url'];
+		foreach ($manifest['icons'] as &$icon)
+			$icon['src'] = PATH . $icon['src'];
+		unset($icon);
+
 		echo json_encode($manifest, JSON_PRETTY_PRINT);
 		die();
 	}

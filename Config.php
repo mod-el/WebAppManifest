@@ -39,7 +39,7 @@ class Config extends Module_Config
 			foreach ($iconFormats as $format) {
 				if (file_exists($configPath . DIRECTORY_SEPARATOR . 'icons' . DIRECTORY_SEPARATOR . $manifest . DIRECTORY_SEPARATOR . $format . '.png')) {
 					$data['icons'][] = [
-						'src' => PATH . 'app/config/WebAppManifest/icons/' . $manifest . '/' . $format . '.png',
+						'src' => 'app/config/WebAppManifest/icons/' . $manifest . '/' . $format . '.png',
 						'sizes' => $format . 'x' . $format,
 						'type' => 'image/png',
 					];
