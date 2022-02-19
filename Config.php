@@ -78,4 +78,9 @@ class Config extends Module_Config
 			],
 		];
 	}
+
+	public function getConfigData(): ?array
+	{
+		return [];
+	}
 }
