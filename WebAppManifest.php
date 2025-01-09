@@ -7,31 +7,26 @@ use Model\Form\Form;
 class WebAppManifest extends Module
 {
 	/** @var array */
-	public $manifestData;
+	public array $manifestData;
 
 	/**
 	 * @param string $path
 	 * @return array|null
 	 */
-	public function getManifest(string $path)
+	public function getManifest(string $path): ?array
 	{
 		$config = $this->retrieveConfig();
-		if (isset($config[$path])) {
-			return $config[$path];
-		} else {
-			return null;
-		}
+		return $config[$path] ?? null;
 	}
 
 	/**
 	 * @param string $path
 	 * @param array $data
-	 * @return bool
 	 */
-	public function setManifest(string $path, array $data)
+	public function setManifest(string $path, array $data): void
 	{
 		if (!isset($data['name'], $data['start_url']))
-			return false;
+			return;
 
 		$config = $this->retrieveConfig();
 		$config[$path] = $data;
@@ -46,10 +41,8 @@ $config = ' . var_export($config, true) . ';
 			$iconsPath = str_replace(['/', '\\'], '-', $path);
 			if (!is_dir($configPath . DIRECTORY_SEPARATOR . 'icons' . DIRECTORY_SEPARATOR . $iconsPath))
 				mkdir($configPath . DIRECTORY_SEPARATOR . 'icons' . DIRECTORY_SEPARATOR . $iconsPath, 0777, true);
-
-			return true;
 		} else {
-			return false;
+			throw new \Exception('Cannot write to ' . $configFile);
 		}
 	}
 
