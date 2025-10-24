@@ -12,7 +12,7 @@ class RouterProvider extends AbstractRouterProvider
 		$routes = [];
 		foreach ($config as $path => $data) {
 			$routes[] = [
-				'pattern' => PATH . $path,
+				'pattern' => $path,
 				'controller' => 'WebAppManifest',
 			];
 		}
