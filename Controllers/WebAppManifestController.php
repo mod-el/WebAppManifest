@@ -11,7 +11,9 @@ class WebAppManifestController extends Controller
 
 	public function index()
 	{
-		$manifest = $this->model->_WebAppManifest->manifestData;
+		$config = $this->model->_WebAppManifest->retrieveConfig();
+		$request = implode('/', $this->model->getRequest());
+		$manifest = $config[$request] ?? null;
 		if (!$manifest)
 			die('{}');
 

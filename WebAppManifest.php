@@ -45,23 +45,4 @@ $config = ' . var_export($config, true) . ';
 			throw new \Exception('Cannot write to ' . $configFile);
 		}
 	}
-
-	/**
-	 * @param array $request
-	 * @param string $rule
-	 * @return array|null
-	 */
-	public function getController(array $request, string $rule): ?array
-	{
-		$config = $this->retrieveConfig();
-		$request = implode('/', $request);
-		if (!isset($config[$request]))
-			return null;
-
-		$this->manifestData = $config[$request];
-
-		return [
-			'controller' => 'WebAppManifest',
-		];
-	}
 }

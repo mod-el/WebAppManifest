@@ -56,29 +56,6 @@ class Config extends Module_Config
 		return true;
 	}
 
-	/**
-	 * Rules for API actions
-	 *
-	 * @return array
-	 * @throws \Exception
-	 */
-	public function getRules(): array
-	{
-		$config = $this->retrieveConfig();
-
-		$rules = [];
-		foreach ($config as $manifest => $data) {
-			$rules[] = $manifest;
-		}
-
-		return [
-			'rules' => $rules,
-			'controllers' => [
-				'WebAppManifest',
-			],
-		];
-	}
-
 	public function getConfigData(): ?array
 	{
 		return [];
